@@ -8,7 +8,7 @@ const url = 'https://mysplunkserver.example.com:8088';
 const agent = new MockAgent();
 agent.disableNetConnect();
 setGlobalDispatcher(agent);
-const mockPool = agent.get(host);
+const mockPool = agent.get(url);
 
 tap.test('ignores invalid json', (t) => {
   const writeStream = pinoSplunk({ url });
