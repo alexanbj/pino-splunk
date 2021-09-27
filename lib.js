@@ -1,7 +1,7 @@
 const { request } = require('undici');
 const stream = require('stream');
 const split = require('split2');
-const batch = require('batch2');
+const batch = require('stream-batch');
 const pumpify = require('pumpify');
 
 // TODO: Is there a way of getting the levels out of the logger instead of maintaining our own map?
@@ -62,15 +62,24 @@ function splunkStream(opts) {
   return new stream.Writable({
     objectMode: true,
     write(logs, _, next) {
-      // TODO: handle failures
-      request(url, {
-        method: 'POST',
-        body: JSON.stringify(logs),
-        headers: {
-          Authorization: `Splunk ${opts.token}`,
-          'Content-Type': 'application/json',
+      // TODO: better handling of errors
+      request(
+        url,
+        {
+          method: 'POST',
+          body: JSON.stringify(logs),
+          headers: {
+            Authorization: `Splunk ${opts.token}`,
+            'Content-Type': 'application/json',
+          },
         },
-      });
+        (err, data) => {
+          if (err) {
+            console.error('Error while transporting logs to Splunk');
+            console.error(`${err.message}\n${err.stack}`);
+          }
+        }
+      );
       next();
     },
   });
@@ -79,6 +88,7 @@ function splunkStream(opts) {
 const defaultOptions = {
   path: '/services/collector/event',
   flushSize: 10,
+  flushInterval: 1000,
   soruceType: '_json',
 };
 
@@ -91,6 +101,7 @@ const defaultOptions = {
  * @param {string} [opts.path=/services/collector/event] - URL path to send data to on the Splunk instance.
  * @param {string} [opts.sourceType="_json"] - The sourcetype value to assign to the event data.
  * @param {number} [opts.flushSize=10] - Automatically flush after specified number of events have been reached.
+ * @param {number} [opts.flushInterval=1000] - Automatically flush after specified number of Ms after the last event.
  * @returns {stream.Writable}
  */
 function pinoSplunk(opts) {
@@ -103,7 +114,7 @@ function pinoSplunk(opts) {
   return pumpify(
     jsonStream(),
     transformStream(opts),
-    batch.obj({ size: opts.flushSize }),
+    batch({ maxItems: opts.flushSize, maxWait: opts.flushInterval }),
     splunkStream(opts)
   );
 }

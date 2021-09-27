@@ -19,9 +19,9 @@
   "author": "Alexander Bjerkan <alexander.bjerkan@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "batch2": "^2.0.0",
     "pumpify": "^2.0.0",
     "split2": "^3.0.0",
+    "stream-batch": "^1.0.0",
     "undici": "^4.0.0"
   },
   "devDependencies": {
