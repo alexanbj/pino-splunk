@@ -20,11 +20,11 @@
   "license": "MIT",
   "dependencies": {
     "pumpify": "^2.0.0",
-    "split2": "^3.0.0",
+    "split2": "^4.0.0",
     "stream-batch": "^1.0.0",
-    "undici": "^4.0.0"
+    "undici": "^5.0.0"
   },
   "devDependencies": {
-    "tap": "^15.0.0"
+    "tap": "^16.0.0"
   }
 }

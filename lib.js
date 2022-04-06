@@ -110,7 +110,6 @@ function pinoSplunk(opts) {
     ...opts,
   };
 
-  // TODO: Add support for flushInterval
   return pumpify(
     jsonStream(),
     transformStream(opts),
