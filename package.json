@@ -1,11 +1,15 @@
 {
   "name": "pino-splunk",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Load pino logs into Splunk",
-  "main": "./lib.js",
+  "type": "module",
+  "exports": {
+    ".": "./dist/lib.mjs"
+  },
   "scripts": {
-    "test": "tap test/*.test.js --no-coverage",
-    "prepublishOnly": "npm test"
+    "build": "unbuild",
+    "test": "vitest",
+    "prepublishOnly": "npm build"
   },
   "keywords": [
     "pino",
@@ -14,17 +18,26 @@
     "splunk"
   ],
   "files": [
-    "lib.js"
+    "dist"
   ],
   "author": "Alexander Bjerkan <alexander.bjerkan@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "pumpify": "^2.0.0",
-    "split2": "^4.0.0",
-    "stream-batch": "^1.0.0",
-    "undici": "^5.0.0"
+    "node-fetch-native": "0.1.8",
+    "pino-abstract-transport": "^1.0",
+    "stream-batch": "1.0.0"
   },
   "devDependencies": {
-    "tap": "^16.0.0"
+    "pino": "^8",
+    "unbuild": "^0.9.4",
+    "vi-fetch": "^0.8.0",
+    "vitest": "0.25.1"
+  },
+  "types": "./dist/lib.d.ts",
+  "unbuild": {
+    "entries": [
+      "./src/lib"
+    ],
+    "declaration": true
   }
 }

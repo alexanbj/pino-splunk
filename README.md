@@ -12,7 +12,7 @@ npm install pino-splunk
 ## Usage
 
 ```js
-const pino = require('pino');
+import pino from 'pino';
 
 const splunkTransport = pino.transport({
   target: 'pino-splunk',
