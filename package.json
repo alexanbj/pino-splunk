@@ -9,7 +9,7 @@
   "scripts": {
     "build": "unbuild",
     "test": "vitest",
-    "prepublishOnly": "npm build"
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "pino",
