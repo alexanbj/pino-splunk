@@ -11,7 +11,7 @@
     "test": "vitest",
     "lint": "pnpm rome check . && pnpm rome format .",
     "lint:ci": "pnpm rome ci .",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "pnpm run build"
   },
   "keywords": [
     "pino",
