@@ -43,7 +43,7 @@ const LEVEL_NAMES = {
 } as const;
 
 export default function (opts: PinoSplunkOptions) {
-  opts.flushSize ??= 2;
+  opts.flushSize ??= 10;
   opts.flushIntervalMs ??= 10000;
   opts.path ??= '/services/collector/event';
 
