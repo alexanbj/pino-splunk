@@ -1,6 +1,6 @@
 {
   "name": "pino-splunk",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Load pino logs into Splunk",
   "type": "module",
   "exports": {
