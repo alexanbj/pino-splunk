@@ -63,7 +63,7 @@ export default function (opts: PinoSplunkOptions) {
 
       for await (const logs of batchedSource) {
         if (logs.length > 0) {
-          processLogs(logs, opts.source, url, headers);
+          processLogs(logs, opts.source, opts.index, url, headers);
         }
       }
     },
@@ -79,16 +79,17 @@ function processLogs(
   // rome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
   logs: Array<any>,
   source: string,
+  index: string,
   url: string,
   headers: HeadersInit,
 ) {
-  logs = logs.map((log) => transformLogEntry(log, source));
+  logs = logs.map((log) => transformLogEntry(log, source, index));
 
   uploadLogs(logs, url, headers);
 }
 
 // rome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
-function transformLogEntry(log: any, source: string) {
+function transformLogEntry(log: any, source: string, index: string) {
   const { level, time, err, hostname, msg, ...rest } = log;
 
   const context = {
@@ -99,6 +100,7 @@ function transformLogEntry(log: any, source: string) {
     },
     time,
     source,
+    index,
   };
 
   if (hostname) {
