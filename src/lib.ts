@@ -71,21 +71,23 @@ export default function (opts: PinoSplunkOptions) {
       async close(err, cb) {
         // TODO: Flush the batchedIterator
       },
-    }
+    },
   );
 }
 
 function processLogs(
+  // rome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
   logs: Array<any>,
   source: string,
   url: string,
-  headers: HeadersInit
+  headers: HeadersInit,
 ) {
   logs = logs.map((log) => transformLogEntry(log, source));
 
   uploadLogs(logs, url, headers);
 }
 
+// rome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
 function transformLogEntry(log: any, source: string) {
   const { level, time, err, hostname, msg, ...rest } = log;
 
@@ -118,6 +120,7 @@ function transformLogEntry(log: any, source: string) {
   return context;
 }
 
+// rome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
 async function uploadLogs(logs: Array<any>, url: string, headers: HeadersInit) {
   try {
     const res = await fetch(url, {
@@ -128,12 +131,12 @@ async function uploadLogs(logs: Array<any>, url: string, headers: HeadersInit) {
 
     if (!res.ok) {
       console.warn(
-        `pino-splunk got an unexpected HTTP response while uploading logs. Log entries will be lost. {statusCode=${res.status}}`
+        `pino-splunk got an unexpected HTTP response while uploading logs. Log entries will be lost. {statusCode=${res.status}}`,
       );
     }
   } catch (err) {
     console.warn(
-      `pino-splunk caught an exception while uploading logs. Log entries will be lost. {error=${err?.toString()}}`
+      `pino-splunk caught an exception while uploading logs. Log entries will be lost. {error=${err?.toString()}}`,
     );
   }
 }

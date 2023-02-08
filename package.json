@@ -9,6 +9,8 @@
   "scripts": {
     "build": "unbuild",
     "test": "vitest",
+    "lint": "pnpm rome check . && pnpm rome format .",
+    "lint:ci": "pnpm rome ci .",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "pino": "^8",
+    "rome": "^11.0.0",
     "unbuild": "1.0.1",
     "vi-fetch": "0.8.0",
     "vitest": "0.25.3"

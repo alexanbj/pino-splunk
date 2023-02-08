@@ -2,7 +2,7 @@
  * Implementation by Robert Nagy https://github.com/ronag. Copied from here https://github.com/mcollina/hwp/pull/11
  */
 export async function* batchIterator(iterator, opts) {
-  const count = opts && opts.count ? opts.count : 16;
+  const count = opts?.count ?? 16;
   const buffer = [];
   let next;
   let error;

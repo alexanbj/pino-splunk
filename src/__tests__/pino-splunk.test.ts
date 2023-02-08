@@ -21,7 +21,7 @@ test.skip("batches the log entries' uploads", async () => {
   const stream = pinoSplunk({ ...splunkOptions, flushSize: 2 });
 
   const mock = mockPost(
-    'http://localhost/services/collector/event'
+    'http://localhost/services/collector/event',
   ).willResolve();
 
   const logger = pino(stream);
