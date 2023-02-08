@@ -31,9 +31,9 @@
   "devDependencies": {
     "pino": "^8",
     "rome": "^11.0.0",
-    "unbuild": "1.0.1",
+    "unbuild": "1.1.1",
     "vi-fetch": "0.8.0",
-    "vitest": "0.25.3"
+    "vitest": "0.28.4"
   },
   "types": "./dist/lib.d.ts",
   "unbuild": {
