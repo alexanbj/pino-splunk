@@ -1,0 +1,38 @@
+{
+  "name": "pino-splunk",
+  "version": "0.4.1",
+  "description": "Load pino logs into Splunk",
+  "type": "module",
+  "exports": {
+    ".": "./dist/lib.mjs"
+  },
+  "scripts": {
+    "build": "unbuild"
+  },
+  "repository": "alexanbj/pino-splunk",
+  "keywords": [
+    "pino",
+    "log",
+    "logging",
+    "splunk"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": "Alexander Bjerkan <alexander.bjerkan@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch-native": "^1.0",
+    "pino-abstract-transport": "^1.0"
+  },
+  "optionalDependencies": {
+    "pino": "^8"
+  },
+  "types": "./dist/lib.d.ts",
+  "unbuild": {
+    "entries": [
+      "./src/lib"
+    ],
+    "declaration": true
+  }
+}
