@@ -11,7 +11,10 @@
     "test": "vitest",
     "lint": "pnpm rome check . && pnpm rome format .",
     "lint:ci": "pnpm rome ci .",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "changeset:release": "pnpm run build:lib && changeset publish"
   },
   "keywords": [
     "pino",
@@ -29,6 +32,7 @@
     "pino-abstract-transport": "^1.0"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.2",
     "pino": "^8",
     "rome": "^11.0.0",
     "unbuild": "1.1.1",
