@@ -12,17 +12,28 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16]
+        node-version: [18]
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🟧 Setup pnpm
+        uses: pnpm/action-setup@v2
         with:
           version: 8
-      - uses: actions/setup-node@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
-      - run: pnpm install
-      - run: pnpm run lint:ci
-      - run: pnpm run build
+      - name: 📥 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 💅 Lint
+        run: pnpm run lint:ci
+
+      - name: 🏗 Build lib
+        run: pnpm run build
