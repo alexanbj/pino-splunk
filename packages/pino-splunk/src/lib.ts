@@ -83,9 +83,11 @@ function processLogs(
   url: string,
   headers: HeadersInit,
 ) {
-  logs = logs.map((log) => transformLogEntry(log, source, index));
-
-  uploadLogs(logs, url, headers);
+  uploadLogs(
+    logs.map((log) => transformLogEntry(log, source, index)),
+    url,
+    headers,
+  );
 }
 
 // rome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
