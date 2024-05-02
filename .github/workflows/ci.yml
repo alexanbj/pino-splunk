@@ -10,13 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18]
-
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🟧 Setup pnpm
         uses: pnpm/action-setup@v3
@@ -24,10 +20,9 @@ jobs:
           version: 9
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          node-version: 20
 
       - name: 📥 Install dependencies
         run: pnpm install --frozen-lockfile
