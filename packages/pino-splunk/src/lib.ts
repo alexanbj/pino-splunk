@@ -4,7 +4,7 @@ import { batchIterator } from './batchIterator.mjs';
 
 export interface PinoSplunkOptions {
   /** base URL to the Splunk instance */
-  url: string;
+  baseUrl: string;
 
   /** URL path to send data to on the Splunk instance.
    * @default /services/collector/event
@@ -47,7 +47,7 @@ export default function (opts: PinoSplunkOptions) {
   opts.path ??= '/services/collector/event';
 
   // Create the URL and headers object on initialization instead of on every request
-  const url = new URL(opts.path, opts.url).toString();
+  const url = new URL(opts.path, opts.baseUrl).toString();
   const headers: HeadersInit = {
     Authorization: `Splunk ${opts.token}`,
     'Content-Type': 'application/json',

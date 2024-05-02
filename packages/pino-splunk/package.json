@@ -15,11 +15,10 @@
   "author": "Alexander Bjerkan <alexander.bjerkan@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "node-fetch-native": "^1.0",
-    "pino-abstract-transport": "^1.0"
+    "pino-abstract-transport": "^1.2"
   },
   "optionalDependencies": {
-    "pino": "^8"
+    "pino": "^9"
   },
   "types": "./dist/lib.d.ts",
   "unbuild": {

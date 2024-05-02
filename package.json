@@ -3,6 +3,7 @@
   "scripts": {
     "build": "pnpm --filter pino-splunk build",
     "test": "vitest",
+    "test:ci": "vitest run",
     "lint": "pnpm biome check .",
     "lint:ci": "pnpm biome ci .",
     "changeset": "changeset",
@@ -12,9 +13,10 @@
   "dependencies": {
     "@biomejs/biome": "1.7.2",
     "@changesets/cli": "2.26.2",
-    "pino": "8.14.1",
+    "@open-draft/deferred-promise": "2.2.0",
+    "msw": "2.2.14",
+    "pino": "9.0.0",
     "unbuild": "1.2.1",
-    "vi-fetch": "0.8.0",
-    "vitest": "0.33.0"
+    "vitest": "1.5.3"
   }
 }

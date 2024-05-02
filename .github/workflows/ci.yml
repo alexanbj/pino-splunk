@@ -30,5 +30,8 @@ jobs:
       - name: 💅 Lint
         run: pnpm run lint:ci
 
+      - name: 🧪 Run tests
+        run: pnpm run test:ci
+
       - name: 🏗 Build lib
         run: pnpm run build

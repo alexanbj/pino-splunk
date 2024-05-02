@@ -1,46 +1,68 @@
+import { DeferredPromise } from '@open-draft/deferred-promise';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
 import pino from 'pino';
-import { mockFetch, mockPost } from 'vi-fetch';
-import { beforeEach, expect, test } from 'vitest';
+import { afterAll, beforeAll, expect, test } from 'vitest';
 
 import pinoSplunk from '../lib';
 
-// TODO: Figure out why the vi-fetch toHaveFetched doesn't work
+const MOCK_BASE_URL = 'https://splunk-mock.com';
 
-beforeEach(() => {
-  mockFetch.clearAll();
+// TODO: add mocking for invalid token `{ text: 'Invalid token', code: 4 }`
+const server = setupServer(
+  http.post(`${MOCK_BASE_URL}/*`, () => {
+    return HttpResponse.json({ text: 'Success', code: 0 });
+  }),
+);
+
+beforeAll(() => {
+  server.listen();
 });
 
+afterAll(() => {
+  server.close();
+});
+
+function getRequestPromise(): DeferredPromise<Request> {
+  const requestPromise = new DeferredPromise<Request>();
+  // Await the requests for the mocked responses
+  server.events.on('request:match', ({ request }) => {
+    requestPromise.resolve(request);
+  });
+
+  return requestPromise;
+}
 const splunkOptions = {
-  baseURL: 'http://localhost',
-  token: '123',
+  baseUrl: MOCK_BASE_URL,
+  token: 'test-token',
   index: 'dev',
   source: 'unit-test',
 };
 
-test.skip("batches the log entries' uploads", async () => {
-  const stream = pinoSplunk({ ...splunkOptions, flushSize: 2 });
-
-  const mock = mockPost(
-    'http://localhost/services/collector/event',
-  ).willResolve();
-
+test('it sets Authorization header with the HEC token', async () => {
+  const stream = pinoSplunk({ ...splunkOptions, flushSize: 1 });
   const logger = pino(stream);
 
-  logger.info('test1');
-  logger.info('test2');
+  logger.info('foobar');
 
-  expect(mock).toHaveFetched();
+  const request = await getRequestPromise();
 
-  logger.info('test3');
+  expect(request.headers.get('Authorization')).toBe(
+    `Splunk ${splunkOptions.token}`,
+  );
 });
 
-test.skip('handles request errors "gracefully"', async () => {
-  const stream = pinoSplunk(splunkOptions);
-
-  const mock = mockPost('http://localhost/services/collector/event').willFail();
+test('flushes the log entries when flush size is reached', async () => {
+  const stream = pinoSplunk({ ...splunkOptions, flushSize: 2 });
 
   const logger = pino(stream);
 
-  logger.info('will fail');
-  expect(mock).toHaveFetched();
+  logger.info('foo');
+  logger.info('bar');
+
+  const request = await getRequestPromise();
+
+  const data = await request.json();
+
+  expect(data).toHaveLength(2);
 });
