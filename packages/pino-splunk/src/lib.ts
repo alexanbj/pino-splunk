@@ -1,4 +1,3 @@
-import fetch from 'node-fetch-native';
 import build from 'pino-abstract-transport';
 // @ts-ignore
 import { batchIterator } from './batchIterator.mjs';
