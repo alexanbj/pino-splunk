@@ -1,6 +1,6 @@
-import { expect, test, beforeEach } from 'vitest';
-import { mockPost, mockFetch } from 'vi-fetch';
 import pino from 'pino';
+import { mockFetch, mockPost } from 'vi-fetch';
+import { beforeEach, expect, test } from 'vitest';
 
 import pinoSplunk from '../lib';
 

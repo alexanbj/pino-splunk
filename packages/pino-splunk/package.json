@@ -10,15 +10,8 @@
     "build": "unbuild"
   },
   "repository": "alexanbj/pino-splunk",
-  "keywords": [
-    "pino",
-    "log",
-    "logging",
-    "splunk"
-  ],
-  "files": [
-    "dist"
-  ],
+  "keywords": ["pino", "log", "logging", "splunk"],
+  "files": ["dist"],
   "author": "Alexander Bjerkan <alexander.bjerkan@gmail.com>",
   "license": "MIT",
   "dependencies": {
@@ -30,9 +23,7 @@
   },
   "types": "./dist/lib.d.ts",
   "unbuild": {
-    "entries": [
-      "./src/lib"
-    ],
+    "entries": ["./src/lib"],
     "declaration": true
   }
 }

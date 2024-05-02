@@ -1,7 +1,7 @@
+import fetch from 'node-fetch-native';
 import build from 'pino-abstract-transport';
 // @ts-ignore
 import { batchIterator } from './batchIterator.mjs';
-import fetch from 'node-fetch-native';
 
 export interface PinoSplunkOptions {
   /** base URL to the Splunk instance */
@@ -55,7 +55,7 @@ export default function (opts: PinoSplunkOptions) {
   };
 
   return build(
-    async function (source) {
+    async (source) => {
       const batchedSource = batchIterator(source, {
         timeout: opts.flushIntervalMs,
         count: opts.flushSize,
@@ -76,7 +76,7 @@ export default function (opts: PinoSplunkOptions) {
 }
 
 function processLogs(
-  // rome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
+  // biome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
   logs: Array<any>,
   source: string,
   index: string,
@@ -90,7 +90,7 @@ function processLogs(
   );
 }
 
-// rome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
+// biome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
 function transformLogEntry(log: any, source: string, index: string) {
   const { level, time, err, hostname, msg, ...rest } = log;
 
@@ -124,7 +124,7 @@ function transformLogEntry(log: any, source: string, index: string) {
   return context;
 }
 
-// rome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
+// biome-ignore lint/suspicious/noExplicitAny: TODO: remove usage of any
 async function uploadLogs(logs: Array<any>, url: string, headers: HeadersInit) {
   try {
     const res = await fetch(url, {

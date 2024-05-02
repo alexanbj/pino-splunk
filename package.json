@@ -3,16 +3,16 @@
   "scripts": {
     "build": "pnpm --filter pino-splunk build",
     "test": "vitest",
-    "lint": "pnpm rome check . && pnpm rome format .",
-    "lint:ci": "pnpm rome ci .",
+    "lint": "pnpm biome check .",
+    "lint:ci": "pnpm biome ci .",
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "changeset:release": "pnpm run build && changeset publish"
   },
   "dependencies": {
+    "@biomejs/biome": "1.7.2",
     "@changesets/cli": "2.26.2",
     "pino": "8.14.1",
-    "rome": "12.1.3",
     "unbuild": "1.2.1",
     "vi-fetch": "0.8.0",
     "vitest": "0.33.0"
