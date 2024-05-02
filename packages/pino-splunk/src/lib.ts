@@ -66,11 +66,11 @@ export default function (opts: PinoSplunkOptions) {
         }
       }
     },
-    {
-      async close(err, cb) {
-        // TODO: Flush the batchedIterator
-      },
-    },
+    // {
+    //   async close(err, cb) {
+    //     // TODO: Flush the batchedIterator
+    //   },
+    // },
   );
 }
 

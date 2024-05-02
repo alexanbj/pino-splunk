@@ -16,7 +16,8 @@
     "@open-draft/deferred-promise": "2.2.0",
     "msw": "2.2.14",
     "pino": "9.0.0",
-    "unbuild": "1.2.1",
+    "typescript": "5.4.5",
+    "unbuild": "2.0.0",
     "vitest": "1.5.3"
   }
 }

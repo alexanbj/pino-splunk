@@ -6,9 +6,8 @@
     "strict": true,
     "noEmit": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "types": ["vi-fetch/matchers"]
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "dist"]
 }
