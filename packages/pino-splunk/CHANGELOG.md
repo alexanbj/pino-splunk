@@ -1,5 +1,11 @@
 # pino-splunk
 
+## 0.6.0
+
+### Minor Changes
+
+- 8cf3411: deps: upgrade pino-abstract-transport to 2.0.0
+
 ## 0.5.0
 
 ### Minor Changes
