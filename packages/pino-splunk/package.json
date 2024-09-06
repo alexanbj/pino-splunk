@@ -16,7 +16,7 @@
   "author": "Alexander Bjerkan <alexander.bjerkan@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "pino-abstract-transport": "^1.2"
+    "pino-abstract-transport": "^2.0"
   },
   "optionalDependencies": {
     "pino": "^9"
