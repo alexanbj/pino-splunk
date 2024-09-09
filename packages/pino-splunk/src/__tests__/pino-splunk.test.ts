@@ -4,7 +4,7 @@ import { setupServer } from 'msw/node';
 import pino from 'pino';
 import { afterAll, beforeAll, expect, test } from 'vitest';
 
-import pinoSplunk from '../lib';
+import pinoSplunk from '../index';
 
 const MOCK_BASE_URL = 'https://splunk-mock.com';
 

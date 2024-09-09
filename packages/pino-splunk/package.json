@@ -4,10 +4,20 @@
   "description": "Load pino logs into Splunk",
   "type": "module",
   "exports": {
-    ".": "./dist/lib.mjs"
+    "import": {
+      "types": "./dist/lib.d.ts",
+      "default": "./dist/lib.mjs"
+    },
+    "require": {
+      "types": "./dist/lib.d.cts",
+      "default": "./dist/lib.cjs"
+    }
   },
+  "main": "./dist/lib.cjs",
+  "module": "./dist/lib.mjs",
+  "types": "./dist/lib.d.ts",
   "scripts": {
-    "build": "unbuild",
+    "build": "bunchee --runtime node --target es2020",
     "check-types": "pnpm dlx @arethetypeswrong/cli --pack"
   },
   "repository": "alexanbj/pino-splunk",
@@ -20,10 +30,5 @@
   },
   "optionalDependencies": {
     "pino": "^9"
-  },
-  "types": "./dist/lib.d.ts",
-  "unbuild": {
-    "entries": ["./src/lib"],
-    "declaration": true
   }
 }
