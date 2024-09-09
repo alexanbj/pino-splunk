@@ -27,7 +27,7 @@ const splunkTransport = pino.transport({
   target: 'pino-splunk',
   options: {
     // These parameters are required
-    url: 'https://mysplunkserver.example.com:8088',
+    baseUrl: 'https://mysplunkserver.example.com:8088',
     token: 'my-token',
     source: 'my-app-name',
     index: 'stage',
