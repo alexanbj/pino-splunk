@@ -1,5 +1,15 @@
 # pino-splunk
 
+## 0.6.0
+
+### Minor Changes
+
+- 8cf3411: deps: upgrade pino-abstract-transport to 2.0.0
+
+### Patch Changes
+
+- 00f6ba4: docs: fix parameter name in README so it reflects implementation
+
 ## 0.5.0
 
 ### Minor Changes
